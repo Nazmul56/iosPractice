@@ -10,22 +10,43 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var recordingLable: UILabel!
     
+    @IBOutlet weak var recordButton: UIButton!
+    
+    @IBOutlet weak var stopRecordingButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    @IBAction func sampleButton(_ sender: Any) {
-        print("Record Button Pressed")
-        label.text = "Recording "
-        
+        stopRecordingButton.isEnabled = false
     }
     
-    @IBAction func stopRecording(_ sender: Any) {
-        print("Stop Recording")
-        label.text = "Recording Stop"
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear Called")
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        //Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func recordButton(_ sender: Any) {
+        print("Record Button Pressed")
+        recordingLable.text = "Recording in progress."
+        stopRecordingButton.isEnabled = true
+        recordButton.isEnabled = false
+    }
+    
+    
+    @IBAction func stopRecordButton(_ sender: Any) {
+        print("Stop Button Pressed")
+        recordingLable.text = "Tap to record"
+        stopRecordingButton.isEnabled = false
+        recordButton.isEnabled = true
     }
     
 }
